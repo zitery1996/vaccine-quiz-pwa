@@ -5,14 +5,14 @@
  * 请求时 cache-first 策略（静态资源优先使用缓存）
  */
 
-const CACHE_NAME = 'vaccine-quiz-v1';
+const CACHE_NAME = 'vaccine-quiz-v2';
 
-// 需要预缓存的核心资源
+// 需要预缓存的核心资源（相对路径，随 SW 作用域自动适配子路径部署）
 const PRECACHE_URLS = [
-  '/',
-  '/index.html',
-  '/manifest.json',
-  '/questions.md',
+  './',
+  './index.html',
+  './manifest.json',
+  './questions.md',
 ];
 
 // ========== 安装：预缓存核心资源 ==========
@@ -100,7 +100,7 @@ self.addEventListener('fetch', (event) => {
               .get('accept')
               ?.includes('text/html')
           ) {
-            return caches.match('/index.html');
+            return caches.match('./index.html');
           }
           // 其他资源返回空响应
           return new Response('', { status: 408 });

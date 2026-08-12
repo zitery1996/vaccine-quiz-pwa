@@ -45,7 +45,8 @@ export function useQuestions(): UseQuestionsReturn {
 
     try {
       // 1. 加载并解析 Markdown 题库
-      const response = await fetch('/questions.md');
+      // 使用 BASE_URL 兼容 GitHub Pages 子路径部署
+      const response = await fetch(`${import.meta.env.BASE_URL}questions.md`);
       if (!response.ok) {
         throw new Error(
           `题库加载失败: HTTP ${response.status}`,
